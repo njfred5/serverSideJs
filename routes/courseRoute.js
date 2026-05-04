@@ -1,0 +1,10 @@
+const express = require("express")
+const router = express.Router()
+const controller = require("../controllers/courseController")
+const authCheck = require("../middleware/auth-middleware")
+router.get("/", authCheck, controller.getAllCourses)
+router.get("/:id", authCheck, controller.getCourseById)
+router.post("/", authCheck, controller.createCourse)
+router.put("/:id", authCheck, controller.updateCourse)
+router.delete("/:id", authCheck, controller.deleteCourse)
+module.exports = router

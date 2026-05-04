@@ -1,5 +1,6 @@
-const express = require("express") // old js
+const express = require("express")
 const cors = require("cors")
+const mongoose = require("mongoose")
 
 const app = express()
 const port = 3000
@@ -7,12 +8,19 @@ const port = 3000
 app.use(cors())
 app.use(express.json())
 
+mongoose.connect("mongodb://localhost:27017/schooldb")
+  .then(() => console.log("connected to mongodb"))
+  .catch((err) => console.log("mongodb error:", err))
+
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to my API' })
 })
 
 const studentsRoutes = require("./routes/students")
 app.use("/api/students", studentsRoutes)
+
+const courseRoutes = require("./routes/courseRoute")
+app.use("/api/courses", courseRoutes)
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`)
