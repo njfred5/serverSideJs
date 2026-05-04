@@ -3,7 +3,7 @@ const authCheck = (req, res, next) => {
   if (!token) {
     return res.status(401).json({ error: "no token, access denied" })
   }
-  if (token !== "mysecrettoken") {
+  if (token !== "Fred_token") {
     return res.status(401).json({ error: "invalid token" })
   }
   next()
